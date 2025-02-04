@@ -10,6 +10,9 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementation of the MailSenderService interface. Provides methods for sending emails.
+ */
 @Service
 public class MailSenderServiceImpl {
     private final JavaMailSender mailSender;

@@ -9,6 +9,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+/**
+ * Interface for the TicketService class. Provides methods for creating, updating, and deleting tickets, as well as
+ * retrieving tickets by ID, and filtering tickets.
+ */
 public interface TicketService {
     TicketResponseDTO requestToBeSeller(DemandSellerRequestDTO demandSellerRequestDTO, MultipartFile userPhoto, List<MultipartFile> portfolio);
 

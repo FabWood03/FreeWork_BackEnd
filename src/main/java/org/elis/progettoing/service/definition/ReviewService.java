@@ -9,6 +9,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+/**
+ * Interface for the ReviewService class. Provides methods for creating, updating, and deleting reviews, as well as
+ * retrieving reviews by product ID, user ID, and user ID of the reviewer.
+ */
 public interface ReviewService {
     ReviewResponseDTO createReview(ReviewRequestDTO reviewRequestDTO, List<MultipartFile> images);
 

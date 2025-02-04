@@ -5,6 +5,9 @@ import org.elis.progettoing.models.Ticket;
 import org.elis.progettoing.models.User;
 import org.elis.progettoing.models.auction.Auction;
 
+/**
+ * Interface for the EmailService class. Provides methods for sending emails to users.
+ */
 public interface EmailService {
     void sendSellerRequestDemand(Ticket ticket);
 

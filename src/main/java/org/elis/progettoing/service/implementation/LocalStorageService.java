@@ -18,6 +18,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.*;
 
+/**
+ * Service class for managing local storage operations.
+ * Provides methods for saving, updating, and deleting images.
+ */
 @Service
 public class LocalStorageService {
 

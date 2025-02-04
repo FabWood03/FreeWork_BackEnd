@@ -5,6 +5,10 @@ import org.elis.progettoing.dto.response.auction.OfferResponseDTO;
 
 import java.util.List;
 
+/**
+ * Interface for the OfferService class. Provides methods for creating, updating, and deleting offers, as well as
+ * retrieving offers by ID, user, and auction.
+ */
 public interface OfferService {
 
     OfferResponseDTO updateOffer(OfferRequestDTO offerRequestDTO);

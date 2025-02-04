@@ -6,6 +6,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+/**
+ * Interface for the UserService class. Provides methods for retrieving, updating, and deleting users.
+ */
 public interface UserService {
     List<UserResponseDTO> findAll();
 

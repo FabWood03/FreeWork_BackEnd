@@ -8,6 +8,10 @@ import org.elis.progettoing.dto.response.order.OrderResponseDTO;
 
 import java.util.List;
 
+/**
+ * Interface for the OrderService class. Provides methods for creating, updating, and deleting orders, as well as
+ * retrieving orders by user, seller, and order product.
+ */
 public interface OrderService {
     OrderResponseDTO createOrder(OrderRequestDTO orderRequestDTO);
 

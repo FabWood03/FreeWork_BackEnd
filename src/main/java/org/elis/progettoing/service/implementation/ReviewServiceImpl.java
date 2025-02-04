@@ -201,6 +201,11 @@ public class ReviewServiceImpl implements ReviewService {
                 .toList();
     }
 
+    /**
+     * Method for obtaining reviews by user ID
+     *
+     * @return List of user reviews
+     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public List<ReviewResponseDTO> getReviewsByUserId(long userId) {
@@ -224,7 +229,6 @@ public class ReviewServiceImpl implements ReviewService {
         double totalRating = 0;
         List<Review> reviews = reviewRepository.findByProductOwnerId(userId);
 
-        // Includi la nuova review nel calcolo
         if (newReview != null) {
             reviews.add(newReview);
         }
@@ -258,26 +262,22 @@ public class ReviewServiceImpl implements ReviewService {
             int roundedRating = (int) Math.round(rating);
 
             if (roundedRating >= 1 && roundedRating <= 5) {
-                // Aggiorna SOLO se il rating è valido
                 ratingCounts[roundedRating - 1] += count;
                 totalReviews += count;
                 totalRatingSum += rating * count;
             }
         }
 
-        // Crea una lista di ReviewSummary con le valutazioni da 1 a 5
         List<ReviewSummary> ratingSummaries = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             ratingSummaries.add(new ReviewSummary(i + 1, ratingCounts[i]));
         }
 
-        // Calcola la media delle valutazioni (media esatta, senza arrotondamento)
         double averageRating = 0;
         if (totalReviews > 0) {
             averageRating = totalRatingSum / totalReviews;
         }
 
-        // Restituisci il riepilogo delle recensioni
         return new ReviewSummaryResponse(ratingSummaries, totalReviews, averageRating);
     }
 
@@ -290,43 +290,35 @@ public class ReviewServiceImpl implements ReviewService {
      */
     @Override
     public ReviewSummaryResponse getReviewSummaryByUserId(long userId) {
-        // Esegui la query per ottenere i dati delle recensioni associate ai prodotti dell'utente
         List<Object[]> results = reviewRepository.countReviewsByProductUserId(userId);
 
-        // Crea un array per raccogliere i conteggi per ciascuna valutazione fissa da 1 a 5
-        long[] ratingCounts = new long[5]; // ratingCounts[0] -> 1 stella, ratingCounts[1] -> 2 stelle, ..., ratingCounts[4] -> 5 stelle
-        long totalReviews = 0; // Variabile per il totale delle recensioni
-        double totalRatingSum = 0; // Somma totale delle valutazioni per calcolare la media
+        long[] ratingCounts = new long[5];
+        long totalReviews = 0;
+        double totalRatingSum = 0;
 
-        // Aggiungi i risultati al riepilogo e calcola il totale
         for (Object[] result : results) {
-            double rating = (Double) result[0];  // La valutazione della recensione
-            long count = (Long) result[1];  // Il numero di recensioni con quella valutazione
+            double rating = (Double) result[0];
+            long count = (Long) result[1];
 
-            // Arrotonda la valutazione per considerare solo valutazioni intere (es. 4.75 -> 4)
             int roundedRating = (int) Math.round(rating);
 
-            // Se il rating è tra 1 e 5 (per evitare valori fuori dall'intervallo)
             if (roundedRating >= 1 && roundedRating <= 5) {
-                ratingCounts[roundedRating - 1] += count; // Incrementa il conteggio per quel rating
-                totalReviews += count; // Incrementa il totale delle recensioni
-                totalRatingSum += rating * count; // Somma ponderata per il calcolo della media
+                ratingCounts[roundedRating - 1] += count;
+                totalReviews += count;
+                totalRatingSum += rating * count;
             }
         }
 
-        // Crea un elenco di ReviewSummary con le valutazioni fisse (1-5)
         List<ReviewSummary> ratingSummaries = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             ratingSummaries.add(new ReviewSummary(i + 1, ratingCounts[i]));
         }
 
-        // Calcola la media delle valutazioni (senza arrotondamento)
         double averageRating = 0;
         if (totalReviews > 0) {
-            averageRating = totalRatingSum / totalReviews;  // Calcolo della media
+            averageRating = totalRatingSum / totalReviews;
         }
 
-        // Restituisce l'oggetto con la lista delle recensioni, il totale delle recensioni e la media
         return new ReviewSummaryResponse(ratingSummaries, totalReviews, averageRating);
     }
 }

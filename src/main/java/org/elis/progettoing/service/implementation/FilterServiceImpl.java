@@ -17,18 +17,34 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of the FilterService interface. Provides methods for filtering entities.
+ */
 @Service
 public class FilterServiceImpl implements FilterService {
     private final EntityManager entityManager;
     private final AuctionMapper auctionMapper;
     private final ProductMapper productMapper;
 
+    /**
+     * Constructs a new FilterServiceImpl with the specified EntityManager, AuctionMapper, and ProductMapper.
+     *
+     * @param entityManager the EntityManager to be used for querying the database
+     * @param auctionMapper the AuctionMapper to be used for mapping auctions
+     * @param productMapper the ProductMapper to be used for mapping products
+     */
     public FilterServiceImpl(EntityManager entityManager, AuctionMapper auctionMapper, ProductMapper productMapper) {
         this.entityManager = entityManager;
         this.auctionMapper = auctionMapper;
         this.productMapper = productMapper;
     }
 
+    /**
+     * Retrieves the filtered entities based on the specified filter request.
+     *
+     * @param filterRequest the FilterRequest containing the filter criteria
+     * @return a FilteredEntitiesResponse containing the filtered auctions and products
+     */
     @Override
     public FilteredEntitiesResponse getFilteredEntities(FilterRequest filterRequest) {
         List<AuctionSummaryDTO> filteredAuctions = getFilteredAuctions(filterRequest).stream()
@@ -42,6 +58,12 @@ public class FilterServiceImpl implements FilterService {
         return new FilteredEntitiesResponse(filteredAuctions, filteredProducts);
     }
 
+    /**
+     * Retrieves the filtered auctions based on the specified filter request.
+     *
+     * @param filterRequest the FilterRequest containing the filter criteria
+     * @return a list of Auction entities containing the filtered auctions
+     */
     private List<Auction> getFilteredAuctions(FilterRequest filterRequest) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Auction> query = cb.createQuery(Auction.class);
@@ -82,6 +104,12 @@ public class FilterServiceImpl implements FilterService {
         return entityManager.createQuery(query).getResultList();
     }
 
+    /**
+     * Retrieves the filtered products based on the specified filter request.
+     *
+     * @param filterRequest the FilterRequest containing the filter criteria
+     * @return a list of Product entities containing the filtered products
+     */
     private List<Product> getFilteredProducts(FilterRequest filterRequest) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Product> query = cb.createQuery(Product.class);

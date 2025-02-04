@@ -380,6 +380,11 @@ public class AuctionServiceImpl implements AuctionService {
                 .toList();
     }
 
+    /**
+     * Retrieves a summary of all closed auctions without a winner.
+     *
+     * @return List of DTOs representing closed auctions without a winner.
+     */
     @Override
     public List<AuctionSummaryDTO> getClosedAndWithoutWinnerAuctionSummary() {
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
@@ -409,6 +414,11 @@ public class AuctionServiceImpl implements AuctionService {
                 .toList();
     }
 
+    /**
+     * Retrieves a summary of all open auctions without a winner.
+     *
+     * @return List of DTOs representing open auctions without a winner.
+     */
     @Override
     public List<AuctionSummaryDTO> getOpenAndWithoutWinnerAuctionSummary() {
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
@@ -421,6 +431,11 @@ public class AuctionServiceImpl implements AuctionService {
                 .toList();
     }
 
+    /**
+     * Retrieves a summary of all auctions the user is subscribed to.
+     *
+     * @return List of DTOs representing the auctions the user is subscribed to.
+     */
     @Override
     public Boolean getAuctionSubscriptionByAuctionId(long auctionId) {
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();

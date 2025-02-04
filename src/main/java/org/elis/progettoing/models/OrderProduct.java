@@ -45,11 +45,13 @@ public class OrderProduct {
     @Column(name = "estimated_delivery_date")
     private LocalDateTime estimatedDeliveryDate;
 
-    @Transient // Esclude il campo dal mapping Hibernate
+    @Transient
     private boolean reviewExist;
 
+    /**
+     * Default constructor for OrderProduct.
+     */
     public OrderProduct() {
-        // Default constructor
     }
 
     @Override

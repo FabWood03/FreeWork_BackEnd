@@ -6,6 +6,10 @@ import org.elis.progettoing.dto.response.product.ProductDetailsDTO;
 
 import java.util.List;
 
+/**
+ * Interface for the SubCategoryService class. Provides methods for creating, deleting, and updating subcategories,
+ * as well as retrieving subcategories by ID, and all subcategories.
+ */
 public interface SubCategoryService {
 
     SubCategoryResponseDTO create(SubCategoryRequestDTO subCategoryRequestDTO);

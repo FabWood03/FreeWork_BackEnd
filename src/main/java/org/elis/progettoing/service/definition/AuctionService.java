@@ -6,6 +6,10 @@ import org.elis.progettoing.dto.response.auction.AuctionSummaryDTO;
 
 import java.util.List;
 
+/**
+ * Interface for the AuctionService class. Provides methods for creating, deleting, and updating auctions,
+ * as well as retrieving auction details and lists of active, closed, and pending auctions.
+ */
 public interface AuctionService {
 
     AuctionDetailsDTO createAuction(AuctionRequestDTO auctionRequestDTO);

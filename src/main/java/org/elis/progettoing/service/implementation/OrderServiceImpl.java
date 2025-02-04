@@ -405,6 +405,12 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.orderListToOrderResponseList(ordersForSeller);
     }
 
+    /**
+     * Accepts a single order product.
+     *
+     * @param orderProductId the ID of the order product to accept.
+     * @return the updated {@link OrderResponseDTO}.
+     */
     @Override
     public OrderResponseDTO acceptSingleOrderProduct(long orderProductId) {
         UsernamePasswordAuthenticationToken authentication =
@@ -433,6 +439,12 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.orderToOrderResponseDTO(orderProduct.getOrder());
     }
 
+    /**
+     * Refuses a single order product.
+     *
+     * @param orderProductId the ID of the order product to refuse.
+     * @return the updated {@link OrderResponseDTO}.
+     */
     @Override
     public OrderResponseDTO refuseSingleOrderProduct(long orderProductId) {
         UsernamePasswordAuthenticationToken authentication =
@@ -461,6 +473,12 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.orderToOrderResponseDTO(orderProduct.getOrder());
     }
 
+    /**
+     * Retrieves an order product by ID.
+     *
+     * @param orderProductId the ID of the order product to retrieve.
+     * @return the {@link OrderProductResponseDTO} containing the order product details.
+     */
     @Override
     public OrderProductResponseDTO getOrderProductById(long orderProductId) {
         OrderProduct orderProduct = orderProductRepository.findById(orderProductId)
@@ -469,6 +487,12 @@ public class OrderServiceImpl implements OrderService {
         return orderProductMapper.orderProductToOrderProductResponseDTO(orderProduct);
     }
 
+    /**
+     * Retrieves filtered orders by seller.
+     *
+     * @param orderFilterRequest the request data containing the filter criteria.
+     * @return the {@link FilteredOrdersResponse} containing the filtered orders.
+     */
     @Override
     public FilteredOrdersResponse getFilteredOrdersBySeller(OrderFilterRequest orderFilterRequest) {
         // Ottieni l'utente loggato
@@ -558,6 +582,13 @@ public class OrderServiceImpl implements OrderService {
         return filteredOrdersResponse;
     }
 
+    /**
+     * Delivers a response to the buyer for a specific order product.
+     *
+     * @param orderProductId the ID of the order product to update.
+     * @param response       the response message to send to the buyer.
+     * @return the updated {@link OrderResponseDTO}.
+     */
     @Override
     public OrderResponseDTO deliveryResponse(long orderProductId, String response) {
         OrderProduct orderProduct = orderProductRepository.findById(orderProductId)
@@ -580,6 +611,12 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.orderToOrderResponseDTO(orderProduct.getOrder());
     }
 
+    /**
+     * Retrieves filtered orders.
+     *
+     * @param orderFilterRequest the request data containing the filter criteria.
+     * @return a list of {@link OrderResponseDTO} containing the filtered orders.
+     */
     @Override
     public List<OrderResponseDTO> getOrderFiltered(OrderFilterRequest orderFilterRequest) {
         // Ottieni l'utente loggato
@@ -613,6 +650,14 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.orderListToOrderResponseList(orders);
     }
 
+    /**
+     * Constructs a list of predicates to filter orders.
+     *
+     * @param orderFilterRequest la richiesta contenente i criteri di filtro.
+     * @param criteriaBuilder     il CriteriaBuilder per costruire i predicati.
+     * @param root                il Root per la query.
+     * @return una lista di predicati per filtrare gli ordini.
+     */
     protected List<Predicate> buildOrderPredicates(OrderFilterRequest orderFilterRequest, CriteriaBuilder criteriaBuilder, Root<Order> root) {
         List<Predicate> predicates = new ArrayList<>();
 
@@ -628,6 +673,15 @@ public class OrderServiceImpl implements OrderService {
         return predicates;
     }
 
+    /**
+     * Add a search text predicate to the list of predicates.
+     *
+     * @param request          la richiesta contenente il testo di ricerca.
+     * @param criteriaBuilder  il CriteriaBuilder per costruire i predicati.
+     * @param root             il Root per la query.
+     * @param predicates       la lista di predicati da aggiornare.
+     * @param orderProductJoin il join con OrderProduct per filtrare i prodotti associati.
+     */
     private void addSearchTextPredicate(OrderFilterRequest request, CriteriaBuilder criteriaBuilder, Root<Order> root, List<Predicate> predicates, Join<Order, OrderProduct> orderProductJoin) {
         if (request.getSearchText() != null && !request.getSearchText().isEmpty()) {
             String searchPattern = "%" + request.getSearchText().toLowerCase() + "%";
@@ -652,7 +706,14 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-
+    /**
+     * Add a date range predicate to the list of predicates.
+     *
+     * @param request         the request containing the date range type.
+     * @param criteriaBuilder the CriteriaBuilder to build predicates.
+     * @param root            the Root for the query.
+     * @param predicates      the list of predicates to update.
+     */
     private void addDateRangePredicate(OrderFilterRequest request, CriteriaBuilder criteriaBuilder, Root<Order> root, List<Predicate> predicates) {
         if (request.getDateRangeType() != null) {
             LocalDateTime startDateTime = null;

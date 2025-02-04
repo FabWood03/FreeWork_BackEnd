@@ -173,6 +173,5 @@ public class User implements UserDetails {
      * Default constructor.
      */
     public User() {
-        // Default constructor
     }
 }

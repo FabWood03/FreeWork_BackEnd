@@ -21,6 +21,11 @@ public class SubCategoryMapperImpl implements SubCategoryMapper {
 
     private final MacroCategoryMapper macroCategoryMapper;
 
+    /**
+     * Constructs a new SubCategoryMapperImpl with the specified MacroCategoryMapper.
+     *
+     * @param macroCategoryMapper the MacroCategoryMapper to be used for mapping
+     */
     public SubCategoryMapperImpl(MacroCategoryMapper macroCategoryMapper) {
         this.macroCategoryMapper = macroCategoryMapper;
     }

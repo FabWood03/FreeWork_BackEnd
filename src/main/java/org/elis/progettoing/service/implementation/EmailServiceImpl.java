@@ -193,6 +193,12 @@ public class EmailServiceImpl implements EmailService {
         emailService.sendEmail(email);
     }
 
+    /**
+     * Sends a notification to the user that they have won the specified auction.
+     *
+     * @param auction the auction that the user has won.
+     * @param user    the user to send the notification to.
+     */
     @Override
     @Async
     public void sendAuctionWinnerEmail(Auction auction, User user) {
@@ -210,6 +216,12 @@ public class EmailServiceImpl implements EmailService {
         emailService.sendEmail(email);
     }
 
+    /**
+     * Sends a notification to the user that they have not won the specified auction.
+     *
+     * @param auction the auction that the user has not won.
+     * @param user    the user to send the notification to.
+     */
     @Override
     @Async
     public void sendAuctionNotWinnerEmail(Auction auction, User user) {
@@ -227,6 +239,13 @@ public class EmailServiceImpl implements EmailService {
         emailService.sendEmail(email);
     }
 
+    /**
+     * Sends a notification to the user that the delivery of the specified order has been confirmed.
+     *
+     * @param user         the user to send the notification to.
+     * @param orderProduct the order product that has been delivered.
+     * @param response     the response containing the delivery confirmation details.
+     */
     @Override
     @Async
     public void sendDeliveryConfirmationEmail(User user, OrderProduct orderProduct, String response) {

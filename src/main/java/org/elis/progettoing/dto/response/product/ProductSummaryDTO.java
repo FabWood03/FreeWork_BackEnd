@@ -31,10 +31,15 @@ public class ProductSummaryDTO {
 
     /**
      * Default constructor for {@link ProductSummaryDTO}.
-     * Initializes a new instance of the class without setting any fields.
      */
     public ProductSummaryDTO() {}
 
+    /**
+     * Constructs a new ProductSummaryDTO with the specified ID and title.
+     *
+     * @param id the product ID
+     * @param title the product title
+     */
     public ProductSummaryDTO(long id, String title) {
         this.id = id;
         this.title = title;

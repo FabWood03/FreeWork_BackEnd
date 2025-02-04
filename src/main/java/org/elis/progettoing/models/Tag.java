@@ -36,6 +36,9 @@ public class Tag {
         this.name = name;
     }
 
+    /**
+     * Default constructor for Tag.
+     */
     public Tag() {
 
     }

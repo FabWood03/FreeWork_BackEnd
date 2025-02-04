@@ -24,12 +24,22 @@ public class ProductDetailsDTO extends ProductSummaryDTO {
 
     private List<TagResponseDTO> tags;
 
+    /**
+     * Constructs a new ProductDetailsDTO with the specified subcategory, packages, and tags.
+     *
+     * @param subCategoryResponseDTO the SubCategoryResponseDTO containing the subcategory data
+     * @param productPackageResponseDTOS the list of ProductPackageResponseDTO containing the package data
+     * @param tagResponseDTOS the list of TagResponseDTO containing the tag data
+     */
     public ProductDetailsDTO(SubCategoryResponseDTO subCategoryResponseDTO, List<ProductPackageResponseDTO> productPackageResponseDTOS, List<TagResponseDTO> tagResponseDTOS) {
         this.subCategory = subCategoryResponseDTO;
         this.packages = productPackageResponseDTOS;
         this.tags = tagResponseDTOS;
     }
 
+    /**
+     * Default constructor for the ProductDetailsDTO class.
+     */
     public ProductDetailsDTO() {
 
     }

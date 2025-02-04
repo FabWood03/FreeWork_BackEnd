@@ -31,6 +31,14 @@ public class Cart {
     @Column(name = "created_date")
     private LocalDate createdDate;
 
+    /**
+     * Constructs a new Cart with the specified ID, user, purchased products, and creation date.
+     *
+     * @param id the cart ID
+     * @param user the user who owns the cart
+     * @param purchasedProducts the list of purchased products in the cart
+     * @param createdDate the creation date of the cart
+     */
     public Cart(long id, User user, List<PurchasedProduct> purchasedProducts, LocalDate createdDate) {
         this.id = id;
         this.user = user;
@@ -38,6 +46,9 @@ public class Cart {
         this.purchasedProducts = purchasedProducts;
     }
 
+    /**
+     * Default constructor.
+     */
     public Cart() {}
 
     @Override

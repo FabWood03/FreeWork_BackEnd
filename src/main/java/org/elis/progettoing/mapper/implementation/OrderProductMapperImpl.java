@@ -9,9 +9,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This class implements the OrderProductMapper interface and provides the mapping functionality
+ * between DTOs and entities related to OrderProduct.
+ * It converts OrderProduct to OrderProductResponseDTO and also maps various other related DTOs.
+ */
 @Component
 public class OrderProductMapperImpl implements OrderProductMapper {
 
+    /**
+     * Converts a list of OrderProduct entities to a list of OrderProductResponseDTO.
+     *
+     * @param orderProducts the list of OrderProduct entities containing the order product data
+     * @return the list of OrderProductResponseDTO populated with data from the entities, or an empty list if the entities are null
+     */
     @Override
     public List<OrderProductResponseDTO> orderProductListToOrderProductResponseList(List<OrderProduct> orderProducts) {
         if (orderProducts == null) {
@@ -26,6 +37,12 @@ public class OrderProductMapperImpl implements OrderProductMapper {
         return list;
     }
 
+    /**
+     * Converts an OrderProduct entity to an OrderProductResponseDTO.
+     *
+     * @param orderProduct the OrderProduct entity containing the order product data
+     * @return the OrderProductResponseDTO populated with data from the entity, or null if the entity is null
+     */
     @Override
     public OrderProductResponseDTO orderProductToOrderProductResponseDTO(OrderProduct orderProduct) {
         if (orderProduct == null) {

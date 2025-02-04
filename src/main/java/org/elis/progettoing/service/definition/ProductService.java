@@ -8,6 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+/**
+ * Interface for the ProductService class. Provides methods for creating, retrieving, and deleting products.
+ */
 public interface ProductService {
     ProductDetailsDTO createProduct(ProductRequestDTO productRequestDTO, List<MultipartFile> images);
 
